@@ -6,10 +6,15 @@
 //  Copyright © 2018 Mamunul. All rights reserved.
 //
 
-#include <iostream>
+#include <stdio.h>
+#include "ExtractFeature.hpp"
+#include "learn_fast_tree.hpp"
 
-int main(int argc, const char * argv[]) {
-	// insert code here...
-	std::cout << "Hello, World!\n";
+int main(){
+	
+	extractFeature();
+//	void buildTreeFrom(int num_features, vector<ImageRef> offsets);
 	return 0;
+	
+	
 }

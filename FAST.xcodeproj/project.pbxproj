@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0CB4A5CA2071F925008E95AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CB4A5C92071F925008E95AC /* main.cpp */; };
+		0C46C89C20722C6900F89FA7 /* libCVD_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C46C89B20722C6800F89FA7 /* libCVD_debug.a */; };
+		0CB4A5FD2071FD58008E95AC /* learn_fast_tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CB4A5FC2071FD58008E95AC /* learn_fast_tree.cpp */; };
+		0CB4A6002071FD7D008E95AC /* printf.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0CB4A5FF2071FD7D008E95AC /* printf.cc */; };
+		0CB4A651207222A6008E95AC /* serialize.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0CB4A64F207222A6008E95AC /* serialize.cc */; };
+		0CB4A65620722624008E95AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CB4A65520722624008E95AC /* main.cpp */; };
+		0CB4A66020722750008E95AC /* gvars3.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0CB4A65F20722750008E95AC /* gvars3.cc */; };
+		0CB4A66320722778008E95AC /* ExtractFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CB4A66120722778008E95AC /* ExtractFeature.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +29,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C46C89A20722BA300F89FA7 /* learn_fast_tree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = learn_fast_tree.hpp; sourceTree = "<group>"; };
+		0C46C89B20722C6800F89FA7 /* libCVD_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCVD_debug.a; path = FAST/libCVD_debug.a; sourceTree = "<group>"; };
 		0CB4A5C62071F925008E95AC /* FAST */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FAST; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CB4A5C92071F925008E95AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		0CB4A5FC2071FD58008E95AC /* learn_fast_tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = learn_fast_tree.cpp; sourceTree = "<group>"; };
+		0CB4A5FE2071FD79008E95AC /* varprintf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = varprintf.h; sourceTree = "<group>"; };
+		0CB4A5FF2071FD7D008E95AC /* printf.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = printf.cc; sourceTree = "<group>"; };
+		0CB4A64B20722280008E95AC /* gvars3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gvars3.h; sourceTree = "<group>"; };
+		0CB4A64C20722280008E95AC /* serialize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = serialize.h; sourceTree = "<group>"; };
+		0CB4A64D20722280008E95AC /* gv3_implementation.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gv3_implementation.hh; sourceTree = "<group>"; };
+		0CB4A64F207222A6008E95AC /* serialize.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = serialize.cc; sourceTree = "<group>"; };
+		0CB4A652207222E9008E95AC /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		0CB4A653207222EA008E95AC /* default.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = default.h; sourceTree = "<group>"; };
+		0CB4A65420722384008E95AC /* type_name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = type_name.h; sourceTree = "<group>"; };
+		0CB4A65520722624008E95AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		0CB4A65F20722750008E95AC /* gvars3.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = gvars3.cc; path = "../../../../../Downloads/FAST/gvars-master/src/gvars3.cc"; sourceTree = "<group>"; };
+		0CB4A66120722778008E95AC /* ExtractFeature.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ExtractFeature.cpp; sourceTree = "<group>"; };
+		0CB4A66220722778008E95AC /* ExtractFeature.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ExtractFeature.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C46C89C20722C6900F89FA7 /* libCVD_debug.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +65,7 @@
 			children = (
 				0CB4A5C82071F925008E95AC /* FAST */,
 				0CB4A5C72071F925008E95AC /* Products */,
+				0CB4A66420722B20008E95AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +80,39 @@
 		0CB4A5C82071F925008E95AC /* FAST */ = {
 			isa = PBXGroup;
 			children = (
-				0CB4A5C92071F925008E95AC /* main.cpp */,
+				0CB4A6572072270A008E95AC /* Utility */,
+				0CB4A5FC2071FD58008E95AC /* learn_fast_tree.cpp */,
+				0CB4A65520722624008E95AC /* main.cpp */,
+				0CB4A66120722778008E95AC /* ExtractFeature.cpp */,
+				0CB4A66220722778008E95AC /* ExtractFeature.hpp */,
+				0C46C89A20722BA300F89FA7 /* learn_fast_tree.hpp */,
 			);
 			path = FAST;
+			sourceTree = "<group>";
+		};
+		0CB4A6572072270A008E95AC /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				0CB4A65420722384008E95AC /* type_name.h */,
+				0CB4A64D20722280008E95AC /* gv3_implementation.hh */,
+				0CB4A64B20722280008E95AC /* gvars3.h */,
+				0CB4A64C20722280008E95AC /* serialize.h */,
+				0CB4A64F207222A6008E95AC /* serialize.cc */,
+				0CB4A652207222E9008E95AC /* config.h */,
+				0CB4A653207222EA008E95AC /* default.h */,
+				0CB4A5FE2071FD79008E95AC /* varprintf.h */,
+				0CB4A65F20722750008E95AC /* gvars3.cc */,
+				0CB4A5FF2071FD7D008E95AC /* printf.cc */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		0CB4A66420722B20008E95AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C46C89B20722C6800F89FA7 /* libCVD_debug.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +172,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CB4A5CA2071F925008E95AC /* main.cpp in Sources */,
+				0CB4A651207222A6008E95AC /* serialize.cc in Sources */,
+				0CB4A6002071FD7D008E95AC /* printf.cc in Sources */,
+				0CB4A66020722750008E95AC /* gvars3.cc in Sources */,
+				0CB4A65620722624008E95AC /* main.cpp in Sources */,
+				0CB4A66320722778008E95AC /* ExtractFeature.cpp in Sources */,
+				0CB4A5FD2071FD58008E95AC /* learn_fast_tree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,16 +290,38 @@
 		0CB4A5CE2071F925008E95AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9GAPXPF2Z5;
+				HEADER_SEARCH_PATHS = (
+					"/Users/mamunul/Downloads/FAST/libcvd-master",
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FAST",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		0CB4A5CF2071F925008E95AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9GAPXPF2Z5;
+				HEADER_SEARCH_PATHS = (
+					"/Users/mamunul/Downloads/FAST/libcvd-master",
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FAST",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
