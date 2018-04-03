@@ -295,10 +295,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAPXPF2Z5;
-				HEADER_SEARCH_PATHS = (
-					"/Users/mamunul/Downloads/FAST/libcvd-master",
-					/usr/local/include,
-				);
+				HEADER_SEARCH_PATHS = "/Users/mamunul/Downloads/FAST/libcvd-master";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FAST",
@@ -314,10 +311,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAPXPF2Z5;
-				HEADER_SEARCH_PATHS = (
-					"/Users/mamunul/Downloads/FAST/libcvd-master",
-					/usr/local/include,
-				);
+				HEADER_SEARCH_PATHS = "/Users/mamunul/Downloads/FAST/libcvd-master";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FAST",
