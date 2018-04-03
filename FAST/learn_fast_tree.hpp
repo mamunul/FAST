@@ -29,12 +29,13 @@
 
 #include "gvars3.h"
 #include "varprintf.h"
+#include "Types.h"
 
 using namespace std;
 using namespace varPrintf;
 using namespace CVD;
 using namespace GVars3;
 
-void buildTreeFrom(int num_features, vector<ImageRef> offsets);
-
+shared_ptr<tree> buildTreeFrom(int num_features, vector<ImageRef> offsets, map<string, corner> corners);
+void print_tree(const tree* node, ostream& o, const string& i="");
 #endif /* Header_h */

@@ -48,9 +48,6 @@
 #include "ExtractFeature.hpp"
 
 
-using namespace std;
-using namespace CVD;
-using namespace GVars3;
 
 static const char BrighterFlag = 'b'; ///< Character code for pixels significantly brighter than the centre
 static const char DarkerFlag = 'd';///< Character code for pixels significantly darker than the centre
@@ -133,17 +130,14 @@ inline int is_corner(const SubImage<byte>& im, const ImageRef off, int barrier, 
 }
 
 
-///Driving program
-///@param argc Number of commandline arguments
-///@param argv List of commandline arguments. Contains GVars3 arguments, and images to process.
-void extractFeature()
+map<string, corner> extractFeature()
 {
 //	int lastarg = GUI.parseArguments(argc, argv);
 	
 	vector<string> imgList = {"/Users/mamunul/img1.pnm","/Users/mamunul/img2.pnm"};
 	
 	//Store corners and noncorners by the string representing the feature.
-	map<string, uint64_t> corners, non_corners;
+	map<string, corner> corners;
 	
 	//Scratch string of the correct length for extracting features in to.
 	string scratch(16, '.');
@@ -168,10 +162,13 @@ void extractFeature()
 					//correct bin.
 					extract_feature(scratch, im, pos, threshold);
 					
-					if(is)
-						corners[scratch]++;
-					else
-						non_corners[scratch]++;
+					if(is){
+						corners[scratch].count++;
+						corners[scratch].is_corner = true;
+					}else{
+						corners[scratch].count++;
+						corners[scratch].is_corner = false;
+					}
 				}
 			cerr << "Processed " << imgList[i] << endl;
 		}
@@ -180,13 +177,7 @@ void extractFeature()
 			cerr << "Failed to load " << imgList[i] << ": " << e.what << endl;
 		}
 	}
+
 	
-	cout << 16 << endl;
-	copy(fast_pixel_ring, fast_pixel_ring + 16, ostream_iterator<ImageRef>(cout, " "));
-	cout << endl;
-	
-	for(map<string, uint64_t>::iterator i=corners.begin(); i != corners.end(); i++)
-		cout << i->first << " " << i->second << " 1" << endl;
-	for(map<string, uint64_t>::iterator i=non_corners.begin(); i != non_corners.end(); i++)
-		cout << i->first << " " << i->second << " 0" << endl;
+	return corners;
 }

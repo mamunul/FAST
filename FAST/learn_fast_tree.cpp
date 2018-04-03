@@ -216,7 +216,7 @@ The tokens are whitespace separated.
 @param nfeats Number of features in a feature vector. Used to spot errors.
 @return Loaded datapoints and total number of instances.
 */
-template<int S> tuple<shared_ptr<vector<datapoint<S>>>, uint64_t> load_features(unsigned int nfeats)
+template<int S> tuple<shared_ptr<vector<datapoint<S>>>, uint64_t> load_features(unsigned int nfeats,map<string, corner> corners)
 {
 	shared_ptr<vector<datapoint<S> > > ret(new vector<datapoint<S> >);
 
@@ -227,15 +227,21 @@ template<int S> tuple<shared_ptr<vector<datapoint<S>>>, uint64_t> load_features(
 
 	uint64_t line_num=2;
 
-	for(;;)
+	map<string, corner>::iterator it;
+	for(it = corners.begin();it!=corners.end();it++)
 	{
 		uint64_t count;
 		bool is;
+		
+		unpacked_feature = it->first;
+		
+		count = (it->second).count;
+		is = (it->second).is_corner;
 
-		cin >> unpacked_feature >> count >> is;
+//		cin >> unpacked_feature >> count >> is;
 
-		if(!cin)
-			break;
+//		if(!cin)
+//			break;
 
 		line_num++;
 
@@ -346,87 +352,6 @@ template<int S> int find_best_split(const vector<datapoint<S> >& fs, const vecto
 	return feature_num;
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// Tree buliding
-//
-
-///This class represents a decision tree.
-///Each leaf node contains a class, being Corner or NonCorner.
-///Each decision node contains a feature about which to make a ternary decision.
-///Additionally, each node records how many datapoints were tested.
-///The generated tree structure is not mutable.
-struct tree{
-	///The class of the leaf, and a sentinal to indacate that the node is
-	///not a leaf. Now that I come back to this, it looks suspiciously like
-	///an instance of http://thedailywtf.com/Articles/What_Is_Truth_0x3f_.aspx
-	///Oh well.
-	enum IsCorner
-	{
-		Corner,
-		NonCorner,
-		NonTerminal
-	};
-
-	const shared_ptr<tree> brighter;                  ///<Subtrees
-	const shared_ptr<tree> darker;                    ///<Subtrees
-	const shared_ptr<tree> similar;                   ///<Subtrees
-	const IsCorner is_a_corner;                       ///<Class of this node (if its a leaf)
-	const int feature_to_test;                        ///<Feature (ie pixel) to test if this  is a non-leaf.
-	const uint64_t num_datapoints;	   				  ///<Number of datapoints passing through this node.
-
-	///Convert the tree to a simple string representation.
-	///This is allows comparison of two trees to see if they are the same.
-	///It's probably rather inefficient to hammer the string class compared
-	///to using an ostringstream, but this is not the slowest part of the program.
-	///@return a stringified tree representation
-	string stringify()
-	{
-		if(is_a_corner == NonTerminal)
-			return "(" + brighter->stringify() + darker->stringify() + similar->stringify() + ")";
-		else
-			return string("(") + (is_a_corner == Corner?"1":"0")  +  ")";
-	}
-
-	///Create a leaf node which is a corner
-	///This special constructor function makes it impossible to 
-	///construct a leaf with the NonTerminal class.
-    ///@param n number of datapoints reaching this node.
-	static shared_ptr<tree> CornerLeaf(uint64_t n)
-	{
-		return shared_ptr<tree>(new tree(Corner, n));
-	}
-	
-	///Creat a leaf node which is a non-corner
-	///This special constructor function makes it impossible to 
-	///construct a leaf with the NonTerminal class.
-    ///@param n number of datapoints reaching this node.
-	static shared_ptr<tree> NonCornerLeaf(uint64_t n)
-	{
-		return shared_ptr<tree>(new tree(NonCorner, n));
-	}
-	
-	///Create a non-leaf node
-	///@param b The brighter subtree
-	///@param d The darker subtree
-	///@param s The similar subtree
-    ///@param n Feature number to test
-    ///@param num Number of datapoints reaching this node.
-	tree(shared_ptr<tree> b, shared_ptr<tree> d, shared_ptr<tree> s, int n, uint64_t num)
-	:brighter(b), darker(d), similar(s), is_a_corner(NonTerminal), feature_to_test(n), num_datapoints(num)
-	{}
-
-	private:
-	///The leaf node constructor is private to prevent a tree
-	///being constructed with invalid values.
-	///see also CornerLeaf and NonCornerLeaf.
-	///@param c Class of the node
-	///@param n Number of datapoints which this node represents
-	tree(IsCorner c, uint64_t n)
-	:is_a_corner(c),feature_to_test(-1),num_datapoints(n)
-	{}
-};
 
 
 ///This function uses ID3 to construct a decision tree. The entropy changes
@@ -571,7 +496,7 @@ regular expressions, hence the use if "elsf" as opposed to "elif" or "elseif".
 @param o Stream to serialize to.
 @param i Indent to print before each line of the serialized tree.
 */
-void print_tree(const tree* node, ostream& o, const string& i="")
+void print_tree(const tree* node, ostream& o, const string& i)
 {
 	if(node->is_a_corner == tree::Corner)
 		o << i << "corner" << endl;
@@ -638,7 +563,7 @@ void print_tree(const tree* node, ostream& o, const string& i="")
 ///@param num_features Number of features used
 ///@param weights Weights on each feature. 
 ///@return The learned tree, and number of datapoints.
-template<int S> tuple<shared_ptr<tree>, uint64_t> load_and_build_tree(unsigned int num_features, const vector<double>& weights)
+template<int S> tuple<shared_ptr<tree>, uint64_t> load_and_build_tree(unsigned int num_features, const vector<double>& weights,map<string, corner> corners)
 {
     assert(weights.size() == num_features);
 
@@ -646,7 +571,7 @@ template<int S> tuple<shared_ptr<tree>, uint64_t> load_and_build_tree(unsigned i
 	uint64_t num_datapoints;
 	
 	//Load the data
-	tie(l, num_datapoints) = load_features<S>(num_features);
+	tie(l, num_datapoints) = load_features<S>(num_features,corners);
 	
 	cerr << "Loaded.\n";
 	
@@ -660,32 +585,9 @@ template<int S> tuple<shared_ptr<tree>, uint64_t> load_and_build_tree(unsigned i
 
 
 ///The main program
-///@param argc Number of commandline arguments
-///@param argv Commandline arguments
-void buildTreeFrom(int num_features, vector<ImageRef> offsets)
+
+shared_ptr<tree> buildTreeFrom(int num_features, vector<ImageRef> offsets,map<string, corner> corners)
 {
-	//Set up default arguments
-//	GUI.parseArguments(argc, argv);
-
-//	cin.sync_with_stdio(false);
-//	cout.sync_with_stdio(false);
-
-	
-	///////////////////
-	//read file
-	
-	//Read number of features
-//	unsigned int num_features;
-//	cin >> num_features;
-//	if(!cin.good() || cin.eof())
-//		fatal(6, "Error reading number of features.");
-
-	//Read offset list
-//	vector<ImageRef> offsets(num_features);
-//	for(unsigned int i=0; i < num_features; i++)
-//		cin >> offsets[i];
-//	if(!cin.good() || cin.eof())
-//		fatal(7, "Error reading offset list.");
 
 	//Read weights for the various offsets
 	vector<double> weights(offsets.size());
@@ -702,21 +604,17 @@ void buildTreeFrom(int num_features, vector<ImageRef> offsets)
     ///then 32 bits for hetrogenous structs, there is no point in having
     ///granularity finer than 16 features.
 	if(num_features <= 16)
-		tie(tree, num_datapoints) = load_and_build_tree<16>(num_features, weights);
+		tie(tree, num_datapoints) = load_and_build_tree<16>(num_features, weights, corners);
 	else if(num_features <= 32)
-		tie(tree, num_datapoints) = load_and_build_tree<32>(num_features, weights);
+		tie(tree, num_datapoints) = load_and_build_tree<32>(num_features, weights, corners);
 	else if(num_features <= 48)
-		tie(tree, num_datapoints) = load_and_build_tree<48>(num_features, weights);
+		tie(tree, num_datapoints) = load_and_build_tree<48>(num_features, weights, corners);
 	else if(num_features <= 64)
-		tie(tree, num_datapoints) = load_and_build_tree<64>(num_features, weights);
+		tie(tree, num_datapoints) = load_and_build_tree<64>(num_features, weights, corners);
 	else
 		fatal(8, "Too many feratures (%i). To learn from this, see %s, line %i.", num_features, __FILE__, __LINE__);
 
-	
-	cout << num_features << endl;
-	copy(offsets.begin(), offsets.end(), ostream_iterator<ImageRef>(cout, " "));
-	cout << endl;
-	print_tree(tree.get(), cout);
+	return tree;	
 }
 
 

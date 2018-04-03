@@ -17,6 +17,12 @@
 #include <map>
 #include <iterator>
 #include <string>
+#include "Types.h"
 
-void extractFeature();
+using namespace std;
+using namespace CVD;
+using namespace GVars3;
+
+map<string, corner> extractFeature();
+
 #endif /* extractFeature_hpp */

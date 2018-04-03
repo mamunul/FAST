@@ -46,6 +46,7 @@
 		0CB4A65F20722750008E95AC /* gvars3.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = gvars3.cc; path = "../../../../../Downloads/FAST/gvars-master/src/gvars3.cc"; sourceTree = "<group>"; };
 		0CB4A66120722778008E95AC /* ExtractFeature.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ExtractFeature.cpp; sourceTree = "<group>"; };
 		0CB4A66220722778008E95AC /* ExtractFeature.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ExtractFeature.hpp; sourceTree = "<group>"; };
+		0CEFA5E02073449900313BCB /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +87,7 @@
 				0CB4A66120722778008E95AC /* ExtractFeature.cpp */,
 				0CB4A66220722778008E95AC /* ExtractFeature.hpp */,
 				0C46C89A20722BA300F89FA7 /* learn_fast_tree.hpp */,
+				0CEFA5E02073449900313BCB /* Types.h */,
 			);
 			path = FAST;
 			sourceTree = "<group>";
