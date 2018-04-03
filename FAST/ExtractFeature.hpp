@@ -23,6 +23,6 @@ using namespace std;
 using namespace CVD;
 using namespace GVars3;
 
-map<string, corner> extractFeature();
+map<string, corner> extractFeature(vector<string> img_path_list);
 
 #endif /* extractFeature_hpp */

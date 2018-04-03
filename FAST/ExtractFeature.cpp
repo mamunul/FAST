@@ -130,11 +130,11 @@ inline int is_corner(const SubImage<byte>& im, const ImageRef off, int barrier, 
 }
 
 
-map<string, corner> extractFeature()
+map<string, corner> extractFeature(vector<string> img_path_list)
 {
 //	int lastarg = GUI.parseArguments(argc, argv);
 	
-	vector<string> imgList = {"/Users/mamunul/img1.pnm","/Users/mamunul/img2.pnm"};
+	
 	
 	//Store corners and noncorners by the string representing the feature.
 	map<string, corner> corners;
@@ -146,11 +146,11 @@ map<string, corner> extractFeature()
 	int N = GV3::get<int>("N", 9);
 	
 	//Iterate over all images, extracting features
-	for(int i=0; i < imgList.size(); i++)
+	for(int i=0; i < img_path_list.size(); i++)
 	{
-		cerr << imgList[i] << endl;
+		cerr << img_path_list[i] << endl;
 		try{
-			Image<byte> im = img_load(imgList[i]);
+			Image<byte> im = img_load(img_path_list[i]);
 			for(int r=3; r < im.size().y - 3; r++)
 				for(int c=3; c < im.size().x - 3; c++)
 				{
@@ -170,11 +170,11 @@ map<string, corner> extractFeature()
 						corners[scratch].is_corner = false;
 					}
 				}
-			cerr << "Processed " << imgList[i] << endl;
+			cerr << "Processed " << img_path_list[i] << endl;
 		}
 		catch(Exceptions::All e)
 		{
-			cerr << "Failed to load " << imgList[i] << ": " << e.what << endl;
+			cerr << "Failed to load " << img_path_list[i] << ": " << e.what << endl;
 		}
 	}
 

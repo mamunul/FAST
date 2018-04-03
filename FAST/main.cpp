@@ -13,7 +13,8 @@
 
 int main(){
 	
-	map<string, corner> corners = extractFeature();
+	vector<string> img_path_list = {"/Users/mamunul/img1.pnm","/Users/mamunul/img2.pnm"};
+	map<string, corner> corners = extractFeature(img_path_list);
 	vector<ImageRef> offsets = vector<ImageRef>(16);
 	
 	for (int i = 0;i<16;i++){
