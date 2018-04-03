@@ -10,7 +10,7 @@
 #define extractFeature_hpp
 
 #include <stdio.h>
-#include "gvars3.h"
+//#include "gvars3.h"
 #include <cvd/image_io.h>
 #include <cvd/fast_corner.h>
 #include <stdint.h>
@@ -21,7 +21,7 @@
 
 using namespace std;
 using namespace CVD;
-using namespace GVars3;
+//using namespace GVars3;
 
 map<string, corner> extractFeature(vector<string> img_path_list);
 

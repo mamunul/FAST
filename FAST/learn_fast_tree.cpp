@@ -590,12 +590,7 @@ shared_ptr<tree> buildTreeFrom(int num_features, vector<ImageRef> offsets,map<st
 {
 
 	//Read weights for the various offsets
-	vector<double> weights(offsets.size());
-	for(unsigned int i=0; i < weights.size(); i++){
-		string s = sPrintf("weights.%i", i);
-		weights[i] = GV3::get<double>(s, 1, 1);
-	}
-
+	vector<double> weights(offsets.size(),1);
 
 	shared_ptr<tree> tree;
 	uint64_t num_datapoints;

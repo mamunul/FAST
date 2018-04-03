@@ -142,8 +142,8 @@ map<string, corner> extractFeature(vector<string> img_path_list)
 	//Scratch string of the correct length for extracting features in to.
 	string scratch(16, '.');
 	
-	int threshold = GV3::get<int>("threshold", 30);
-	int N = GV3::get<int>("N", 9);
+	int threshold = 30;// GV3::get<int>("threshold", 30);
+	int N = 9;// GV3::get<int>("N", 9);
 	
 	//Iterate over all images, extracting features
 	for(int i=0; i < img_path_list.size(); i++)
